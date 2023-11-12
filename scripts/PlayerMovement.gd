@@ -5,7 +5,9 @@ const ACCEL = 1000.0
 const FRIC = 1000.0
 const JUMP_VELOCITY = -250.0
 
+# Node References
 @onready var animSprite = $AnimatedSprite2D
+@onready var coyoteJumpTimer = $CoyoteJump
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -14,26 +16,24 @@ func _physics_process(delta):
 	ApplyGrav(delta)
 	HandleJump()
 
-	# Get the input inputDir and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var inputDir = Input.get_axis("walk_left", "walk_right")
 
 	ApplyAcceleration(inputDir, delta)
 	ApplyFriction(inputDir, delta)
 
 	HandleAnim(inputDir)
-
-	move_and_slide()
+	HandleMoveNSlide()
+	
 
 func ApplyGrav(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
 func HandleJump():
-	if is_on_floor():
+	if is_on_floor() or coyoteJumpTimer.time_left > 0.0:
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY
-	else:
+	if not is_on_floor():
 		if Input.is_action_just_released("jump") and velocity.y <= JUMP_VELOCITY / 2:
 			velocity.y = JUMP_VELOCITY / 2
 
@@ -52,3 +52,14 @@ func HandleAnim(dir):
 		animSprite.play("run")
 	else:
 		animSprite.play("idle")
+
+func HandleMoveNSlide():
+	var wasOnFloor = is_on_floor()
+
+	#CharacterBody2D function
+	move_and_slide()
+
+	var isOffFloor = wasOnFloor and not is_on_floor() and velocity.y >= 0
+
+	if isOffFloor:
+		coyoteJumpTimer.start()

@@ -153,3 +153,11 @@ sprite_frames = SubResource("SpriteFrames_x776k")
 animation = &"idle"
 frame = 7
 frame_progress = 0.819612
+
+[node name="CoyoteJump" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -35)
+position_smoothing_speed = 1.0
