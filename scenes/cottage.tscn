@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://l8yqjp6pv5rv"]
+[gd_scene load_steps=3 format=3 uid="uid://l8yqjp6pv5rv"]
 
 [ext_resource type="Script" path="res://scripts/TerrainDrawer.gd" id="1_u4x3v"]
 [ext_resource type="PackedScene" uid="uid://gb835g2j1rn6" path="res://scenes/player.tscn" id="2_um25d"]
-[ext_resource type="Script" path="res://scripts/PlayerMovement.gd" id="3_rvj1f"]
 
 [node name="World" type="Node2D"]
 
@@ -16,4 +15,3 @@ polygon = PackedVector2Array(8, 0, 8, 144, 80, 144, 96, 128, 128, 128, 144, 144,
 
 [node name="Player" parent="." instance=ExtResource("2_um25d")]
 position = Vector2(32, 112)
-script = ExtResource("3_rvj1f")

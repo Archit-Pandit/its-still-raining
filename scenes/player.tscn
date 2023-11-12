@@ -1,7 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://gb835g2j1rn6"]
+[gd_scene load_steps=24 format=3 uid="uid://gb835g2j1rn6"]
 
 [ext_resource type="Texture2D" uid="uid://xu6civsbfi5f" path="res://sprites/virran_32x_idle.png" id="1_7r6aa"]
+[ext_resource type="Script" path="res://scripts/PlayerMovement.gd" id="1_eql8y"]
 [ext_resource type="Texture2D" uid="uid://mnhs7782608j" path="res://sprites/virran_32x_run.png" id="2_bog5s"]
+[ext_resource type="Resource" uid="uid://b47nl1bu0wfnh" path="res://resources/default_move_data.tres" id="2_pl4t7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p20mw"]
 radius = 8.0
@@ -142,6 +144,8 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 floor_max_angle = 0.959931
 floor_snap_length = 2.0
+script = ExtResource("1_eql8y")
+movementData = ExtResource("2_pl4t7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
